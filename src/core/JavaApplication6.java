@@ -1,6 +1,7 @@
 
 package core;
 
+import java.util.Arrays;
 import java.util.HashSet;
 /**
  *
@@ -12,6 +13,7 @@ public class JavaApplication6 {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        Graph gr = new Graph();
         Dot a = new Dot('A', new HashSet<>());
         Dot b = new Dot('B', new HashSet<>());
         Dot c = new Dot('C', new HashSet<>());
@@ -31,7 +33,9 @@ public class JavaApplication6 {
         c.getConnections().add(d);
         
         e.getConnections().add(c);
-
         
+        boolean res = gr.isClique(Arrays.asList(a,b,c));
+
+        System.out.println("res:" + res);
     }   
 }

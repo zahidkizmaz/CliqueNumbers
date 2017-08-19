@@ -1,5 +1,6 @@
 package core;
 
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -23,24 +24,36 @@ public class Graph {
     public Graph(String name) {
         this.name = name;
     }
-    
-    public int getMaxClique(){
-        int conn = 0;
+
+    public int getMaxClique() {
+        int conn = 0, clique = 0;
+        Dot maxConnDot;
         for (Dot dot : this.dots) {
             if (dot.getConnections().size() > conn) {
                 conn = dot.getConnections().size();
+                maxConnDot = dot;
             }
         }
-        
-        return 0;
+
+        return clique;
     }
-    
-    private boolean isClique(Graph gr){
-        
-        
-        return false;
+
+    public boolean isClique(List<Dot> dots) {
+        boolean result = true;
+        for (Dot dot : dots) {
+            for (Dot dot1 : dots) {
+                if (!isConnected(dot, dot1) && !dot.equals(dot1)) {
+                    result = false;
+                }
+            }
+        }
+
+        return result;
     }
-    
+
+    private boolean isConnected(Dot dot1, Dot dot2) {
+        return dot1.getConnections().contains(dot2) && dot2.getConnections().contains(dot1);
+    }
 
     public String getName() {
         return name;
